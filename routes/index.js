@@ -7,10 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/:shoreCode', function(req, res, next) {
-  var { hash } = req.params;
-  if (hash !== 'links') {
-    Link.findOne({ shortCode: shortCode })
+router.get('/:code', function(req, res, next) {
+  var { code } = req.params;
+  if (code !== 'links') {
+    Link.findOne({ shortCode: code })
       .then(data => {
         res.redirect(301, data.original);
         next();
