@@ -10,10 +10,18 @@ router.get('/', function(req, res, next) {
 router.get('/:shoreCode', function(req, res, next) {
   var { hash } = req.params;
   if (hash !== 'links') {
-    Link.findOne({ shortCode: shortCode }).then(data => {
-      res.redirect(301, data.original);
-      next();
-    });
+    Link.findOne({ shortCode: shortCode })
+      .then(data => {
+        res.redirect(301, data.original);
+        next();
+      })
+      .catch(e => {
+        res.status(500).json({
+          success: false,
+          message: 'error',
+          error: e
+        });
+      });
   } else {
     next();
   }
