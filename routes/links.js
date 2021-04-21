@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Link = require('../models/Link');
+const validUrl = require('valid-url');
 const { customRandom, urlAlphabet, customAlphabet, nanoid } = require('nanoid');
 
 router.get('/', function(req, res, next) {
@@ -23,8 +24,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var { original } = req.body;
-  var shortCode = nanoid();
-  var shortUrl = `http://localhost:3200/` + shortCode;
   if (!original) {
     res.status(400).json({
       success: false,
@@ -32,10 +31,20 @@ router.post('/', function(req, res, next) {
       error: 'original cannot be empty'
     });
     next();
+  } else if (validUrl.isUri(original)) {
+    res.status(400).json({
+      success: false,
+      message: 'error',
+      error: 'Not a valid url'
+    });
+    next();
   } else {
     Link.findOne({ original: original })
       .then(data => {
         if (!data) {
+          var shortCode = nanoid();
+          var shortUrl = `http://localhost:3200/` + shortCode;
+
           Link.create({ original: original, shortUrl: shortUrl, shortCode: shortCode })
             .then(data => {
               res.status(200).json({
