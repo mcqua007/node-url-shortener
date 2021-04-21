@@ -5,7 +5,7 @@ const Link = mongoose.model(
   'Link',
   new Schema({
     original: String,
-    to: String
+    redirectUrl: String
   })
 );
 
