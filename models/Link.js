@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const Link = mongoose.model(
   'Link',
   new Schema({
-    original: String,
-    redirectUrl: String
+    shortCode: String,
+    shortUrl: String,
+    original: String
   })
 );
 
