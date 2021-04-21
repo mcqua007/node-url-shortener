@@ -43,8 +43,10 @@
 
     <body>
         <h1 class="text-center">URL Shortener</h1>
-        <form action="" class="url-shorten-form flex align-center">
-            <input type="text" placeholder="Input Url to shorten..." id="redirect-url"/>
+        <form class="url-shorten-form flex align-center">
+            <input type="url" placeholder="http://apple.com" id="redirect-url" pattern="https?:\/\/(www\.)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~]*)*(#[\w\-]*)?(\?.*)?" required/>
+
+
             <button type="submit">Submit</button>
         </form>
         <textarea class="flex" id="short-url"></textarea>
@@ -77,14 +79,15 @@
         var form = document.querySelector('.url-shorten-form');
         form.onsubmit = function (e) {
             e.preventDefault();
-            console.log('form submit');
             var url = document.querySelector('#redirect-url');
-            console.log('data', url.value)
 
             post('http://localhost:3200/links', {original: url.value}).then(res => {
-                console.log('post res', res);
-            })
 
+                var shortUrl = document.querySelector('#short-url');
+                shortUrl.value = res.data.shortUrl;
+            }).catch(e => {
+                alert(e);
+            });
         }
     </script>
 </html>
