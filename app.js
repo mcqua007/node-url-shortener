@@ -5,6 +5,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
+var linksRouter = require('./routes/links');
 
 var { MongoMemoryServer } = require('mongodb-memory-server');
 
@@ -21,6 +22,7 @@ async function initDB() {
 }
 
 initDB();
+
 var app = express();
 
 app.use(logger('dev'));
@@ -33,5 +35,6 @@ const PORT = process.env.PORT || 3200;
 app.listen(PORT, console.log(`Server started on port ${PORT}. http://localhost:${PORT}`));
 
 app.use('/', indexRouter);
+app.use('/links', linksRouter);
 
 module.exports = app;
