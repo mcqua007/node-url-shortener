@@ -1,6 +1,6 @@
 To run application follow these steps:
 
-1. clone git rep
-2. inside directory run `npm install`
-3. once all dependencies arer installed you can start app by running `npm run dev`
+1. clone git repo
+2. Navigate into the directory and run `npm install`
+3. You can start app by running `npm run dev`
 4. Then navigate to http://localhost:3200
