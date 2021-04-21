@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Link = require('../models/Link');
 const validUrl = require('valid-url');
-const { customRandom, urlAlphabet, customAlphabet, nanoid } = require('nanoid');
+const { urlAlphabet, customAlphabet, nanoid } = require('nanoid');
 
 router.get('/', function(req, res, next) {
   Link.find()
@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
       error: 'original cannot be empty'
     });
     next();
-  } else if (validUrl.isUri(original)) {
+  } else if (!validUrl.isUri(original)) {
     res.status(400).json({
       success: false,
       message: 'error',
@@ -42,6 +42,8 @@ router.post('/', function(req, res, next) {
     Link.findOne({ original: original })
       .then(data => {
         if (!data) {
+          console.log('alphabet', urlAlphabet);
+          const nanoid = customAlphabet(urlAlphabet, 8); //reate shorter nanoId - still 23 trillion combinations
           var shortCode = nanoid();
           var shortUrl = `http://localhost:3200/` + shortCode;
 
