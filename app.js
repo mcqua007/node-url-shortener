@@ -6,6 +6,8 @@ var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 
+var { MongoMemoryServer } = require('mongodb-memory-server');
+
 async function initDB() {
   const mongod = new MongoMemoryServer();
 
