@@ -42,7 +42,6 @@ router.post('/', function(req, res, next) {
     Link.findOne({ original: original })
       .then(data => {
         if (!data) {
-          console.log('alphabet', urlAlphabet);
           const nanoid = customAlphabet(urlAlphabet, 8); //reate shorter nanoId - still 23 trillion combinations
           var shortCode = nanoid();
           var shortUrl = `http://localhost:3200/` + shortCode;
