@@ -66,7 +66,6 @@ describe('links', () => {
         .get('/links')
         .end((err, res) => {
           if (err) return done(err);
-          console.log('res', res);
           res.should.have.status(200);
           res.body.data.should.be.a('array');
           done();
