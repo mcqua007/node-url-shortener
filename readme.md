@@ -1,4 +1,4 @@
-**To run application follow these steps:
+**To run application follow these steps:**
 
 1. clone git repo
 2. Navigate into the directory and run `npm install`
