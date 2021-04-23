@@ -93,7 +93,7 @@
                 var shortUrl = document.querySelector('#short-url');
                 shortUrl.value = res.data.shortUrl;
             }).catch(e => {
-                alert(e);
+                alert(e.error);
             });
         }
     </script>
