@@ -50,7 +50,7 @@ describe('links', () => {
           if (err) return done(err);
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('error').eql('original cannot be empty');
+          res.body.should.have.property('error').eql('Original url cannot be empty!');
           done();
         });
     });
