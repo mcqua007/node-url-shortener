@@ -1,100 +1,18 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <head>
-        <title>Express</title>
+        <title>URL Shortener</title>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css" integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g==" crossorigin="anonymous"/>
         <link rel="stylesheet" href="/stylesheets/style.css">
     </head>
-    <style>
-        .text-center {
-            text-align: center;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .flex {
-            display: flex;
-            width: 100%;
-        }
-
-        .flex.align-center {
-            align-items: center;
-        }
-
-        form,
-        textarea#short-url {
-
-            max-width: 600px;
-            margin: 25px auto;
-        }
-
-
-        form input {
-            padding: 0;
-            margin: 0 15px 0 0;
-        }
-
-        form button {
-            margin: 0;
-        }
-        @media(max-width: 768px) {
-            body {
-                padding: 0 10px;
-            }
-        }
-    </style>
-
     <body>
         <h1 class="text-center">URL Shortener</h1>
         <form class="url-shorten-form flex align-center">
             <input type="url" placeholder="http://apple.com" id="redirect-url" pattern="https?:\/\/(www\.)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~]*)*(#[\w\-]*)?(\?.*)?" required/>
-
-
             <button type="submit">Submit</button>
         </form>
         <textarea class="flex" id="short-url"></textarea>
     </body>
-    <script>
-
-        async function post(url, data, headers = {
-            'Content-Type' : 'application/json'
-        }) {
-            try {
-                let res = await fetch(url, {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify(data)
-                });
-
-                if (res.ok === true && res.status === 200) {
-                    return await res.json();
-                } else {
-                    var errRes = await res.json();
-                    if (! errRes) {
-                        errRes = res;
-                    }
-                    return Promise.reject(errRes);
-                }
-            } catch (error) {
-                console.log('Fetch Post Error: ', error);
-            }
-        }
-        var form = document.querySelector('.url-shorten-form');
-        form.onsubmit = function (e) {
-            e.preventDefault();
-            var url = document.querySelector('#redirect-url');
-
-            post('http://localhost:3200/links', {original: url.value}).then(res => {
-
-                var shortUrl = document.querySelector('#short-url');
-                shortUrl.value = res.data.shortUrl;
-            }).catch(e => {
-                alert(e.error);
-            });
-        }
-    </script>
+    <script src="/js/index.js"></script>
 </html>

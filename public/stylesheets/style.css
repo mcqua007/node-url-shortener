@@ -3,6 +3,42 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.text-center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+}
+
+.flex.align-center {
+  align-items: center;
+}
+
+form,
+textarea#short-url {
+
+  max-width: 600px;
+  margin: 25px auto;
+}
+
+
+form input {
+  padding: 0;
+  margin: 0 15px 0 0;
+}
+
+form button {
+  margin: 0;
+}
+
+@media(max-width: 768px) {
+  body {
+    padding: 0 10px;
+  }
 }
