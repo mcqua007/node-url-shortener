@@ -39,7 +39,7 @@ async function create(req, res, next) {
       if (!originalExists) {
         var data = await Link.create({ original: original });
         let shortCode = data.count.toString(36); //use base36
-        let shortUrl = `http://localhost:3200/` + shortCode;=
+        let shortUrl = `http://localhost:3200/` + shortCode;
         var updateData = await Link.findOneAndUpdate(
           { _id: data.id },
           { shortUrl: shortUrl, shortCode: shortCode },
