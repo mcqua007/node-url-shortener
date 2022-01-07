@@ -7,3 +7,6 @@
 
 **Running tests**
 1. Run `npm test` in terminal
+
+## Description ##
+Used to create short url like bit.ly
